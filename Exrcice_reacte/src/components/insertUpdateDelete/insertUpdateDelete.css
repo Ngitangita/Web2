@@ -1,0 +1,52 @@
+/* App.css */
+.app {
+    text-align: center;
+  }
+  
+  .task {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 5px 0;
+  }
+
+  .task-form input{
+    padding: 10px;
+    outline: none;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 10px;
+    border-radius: 5px;
+  }
+
+  button {
+    border-radius: 5px;
+  }
+  
+  .Add-button {
+    background-color: #07a4ff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .update-button {
+    background-color: #ffc107;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .delete-button {
+    background-color: #dc3545;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: white;
+  }
+  

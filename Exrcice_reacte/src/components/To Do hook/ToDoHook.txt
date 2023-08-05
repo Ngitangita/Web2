@@ -1,0 +1,150 @@
+ L'aperçu de chaque fonction hook en React et de son utilisation générale :
+
+1. **useState** : `useState` est utilisé pour gérer l'état local d'un composant fonctionnel. 
+Il renvoie un état actuel et une fonction pour le mettre à jour.
+
+   Exemple d'utilisation :
+
+   import React, { useState } from 'react';
+
+   function Counter() {
+     const [count, setCount] = useState(0);
+
+     return (
+       <div>
+         <p>Count: {count}</p>
+         <button onClick={() => setCount(count + 1)}>Increment</button>
+       </div>
+     );
+   }
+   ```
+
+2. **useEffect** : `useEffect` permet de gérer les effets de bord dans un composant. 
+Il s'exécute après que le rendu du composant est complet.
+
+   Exemple d'utilisation :
+
+   import React, { useState, useEffect } from 'react';
+
+   function Timer() {
+     const [seconds, setSeconds] = useState(0);
+
+     useEffect(() => {
+       const interval = setInterval(() => {
+         setSeconds(seconds + 1);
+       }, 1000);
+
+       return () => clearInterval(interval);
+     }, [seconds]);
+
+     return <p>Elapsed time: {seconds} seconds</p>;
+   }
+   ```
+
+3. **useContext** : `useContext` permet d'accéder à un contexte spécifié dans un composant fonctionnel.
+
+   Exemple d'utilisation :
+
+   import React, { useContext } from 'react';
+
+   const ThemeContext = React.createContext('light');
+
+   function ThemedText() {
+     const theme = useContext(ThemeContext);
+     return <p>Current theme: {theme}</p>;
+   }
+   ```
+
+4. **useCallback** : `useCallback` renvoie une version mémorisée d'une fonction, 
+utile pour optimiser les performances en évitant la recréation de fonctions à chaque rendu.
+
+   Exemple d'utilisation :
+
+   import React, { useState, useCallback } from 'react';
+
+   function ParentComponent() {
+     const [count, setCount] = useState(0);
+
+     const increment = useCallback(() => {
+       setCount(count + 1);
+     }, [count]);
+
+     return (
+       <div>
+         <p>Count: {count}</p>
+         <ChildComponent increment={increment} />
+       </div>
+     );
+   }
+
+   function ChildComponent({ increment }) {
+     return <button onClick={increment}>Increment</button>;
+   }
+   ```
+
+5. **useReducer** : `useReducer` est une alternative à `useState` pour gérer des états complexes. 
+Il est basé sur le concept de réduction (comme dans Redux).
+
+   Exemple d'utilisation :
+
+   import React, { useReducer } from 'react';
+
+   const initialState = { count: 0 };
+
+   function reducer(state, action) {
+     switch (action.type) {
+       case 'increment':
+         return { count: state.count + 1 };
+       default:
+         return state;
+     }
+   }
+
+   function Counter() {
+     const [state, dispatch] = useReducer(reducer, initialState);
+
+     return (
+       <div>
+         <p>Count: {state.count}</p>
+         <button onClick={() => dispatch({ type: 'increment' })}>Increment</button>
+       </div>
+     );
+   }
+   ```
+
+6. **useMemo** : `useMemo` renvoie une valeur mémorisée calculée en fonction de certaines dépendances. 
+Cela peut être utilisé pour éviter le recalcul coûteux.
+
+   Exemple d'utilisation :
+
+   import React, { useMemo } from 'react';
+
+   function ExpensiveCalculationComponent({ data }) {
+     const result = useMemo(() => {
+       // Effectuer un calcul coûteux en utilisant "data"
+       return performExpensiveCalculation(data);
+     }, [data]);
+
+     return <p>Result: {result}</p>;
+   }
+   ```
+
+7. **useRef** : `useRef` renvoie un objet de référence mutable qui peut être utilisé pour 
+stocker des valeurs persistantes entre les rendus sans déclencher une nouvelle rendu lorsque sa valeur change.
+
+   Exemple d'utilisation :
+
+   import React, { useRef, useEffect } from 'react';
+
+   function InputWithFocus() {
+     const inputRef = useRef(null);
+
+     useEffect(() => {
+       // Focus sur l'élément input après le rendu initial
+       inputRef.current.focus();
+     }, []);
+
+     return <input ref={inputRef} />;
+   }
+   ```
+
